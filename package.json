@@ -8,6 +8,7 @@
     "client": "node scripts/start-client.js",
     "start": "concurrently \"nodemon server.js\" \"npm run client\"",
     "build": "cd client && npm run build",
+    "clean": "git rm --cached routes/auth/authCredentials.js && git rm -r --cached client/build",
     "deploy": "yarn build && git add -f routes/auth/authCredentials.js client/build && git add . && git commit -m \"Building for production\" && git push heroku master && git rm --cached routes/auth/authCredentials.js && git rm -r --cached client/build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
