@@ -1,0 +1,35 @@
+{
+  "name": "newsflash",
+  "version": "1.0.0",
+  "description": "NPR news speedreading app",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "deploy": "yarn build && git add -f routes/auth/authCredentials.js client/build && git add . && git commit -m \"Building for production\" && git push heroku master && git rm --cached routes/auth/authCredentials.js && git rm -r --cached client/build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaahma/Newsflash.git"
+  },
+  "author": "Adam Haag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaahma/Newsflash/issues"
+  },
+  "homepage": "https://github.com/gaahma/Newsflash#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-jwt": "^5.3.0",
+    "jwks-rsa": "^1.2.1",
+    "mongoose": "^4.13.7"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.12.7"
+  }
+}

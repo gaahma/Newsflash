@@ -1,0 +1,47 @@
+h1, p{
+  display: inline-block;
+}
+
+.npr-orange {
+  color: #f15c22;
+}
+
+.npr-blue {
+  color: #4e84c4;
+  /* color: #7cbcfc; */
+  /* color: #75c1ff; */
+}
+
+.banner-wrapper {
+  /* border: 2px solid #e5e5e5; */
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.newsflash {
+  background-color: #000017;
+  text-align: center;
+}
+
+.login {
+  background-color: #f15c22;
+  padding: 1rem;
+  color: white;
+  margin-top: 2rem;
+  border: none; 
+  font-size: 2rem;
+  display: block;
+  width: 30%;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.login:hover {
+  background-color: #4e84c4;
+}
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+};
