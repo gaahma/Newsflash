@@ -11,8 +11,6 @@ class Navbar extends Component {
       menuVisible: {
         backgroundColor: "#222",
         position: 'absolute',
-        //  height: '100px',
-        //  width: '100px',
         right: '0px',
         top: '51px',
         borderLeft: '1px solid #e5e5e5',
@@ -20,10 +18,10 @@ class Navbar extends Component {
         padding: '1rem',
         zIndex: 1,
         opacity: 0.9,
-        transition: '0.5s'
+        //transition: '0.25s'
       },
       menuHidden: {
-        right: '-300px',
+        right: '-500px',
       }
     }
   }
@@ -33,7 +31,13 @@ class Navbar extends Component {
   }
 
   componentDidMount(){
-    window.addEventListener("resize", () => this.setState({menuEnabled: false}));
+    window.addEventListener("resize", 
+      () => {
+        if(window.innerWidth > 767){
+          this.setState({menuEnabled: false})
+        }
+      }
+    );
   }
 
   toggleMobileMenu(){
@@ -47,6 +51,24 @@ class Navbar extends Component {
 
   
   render(){
+    var MenuItems;
+    if(!isLoggedIn()){
+      MenuItems = 
+        (<ul className="nav navbar-nav navbar-right">
+          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Tutorial</a></li>
+          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-log-in npr-orange"></span> Login</a></li>
+        </ul>
+        );
+    } else {
+      MenuItems = 
+        (<ul className="nav navbar-nav navbar-right">
+          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Tutorial</a></li>
+          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-paperclip npr-orange"></span> Saved</a></li>
+          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-user npr-orange"></span> Stats</a></li>
+          <li ><a href="#" onClick={logout} className="npr-blue"><span className="glyphicon glyphicon-log-out npr-orange"></span> Logout</a></li>
+        </ul>
+        );
+    }
     return (
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
@@ -61,23 +83,17 @@ class Navbar extends Component {
             <a className="navbar-brand" href="/">
               <p className="npr-orange">News</p>
               <p className="npr-blue">Flash</p>
-              </a>
+            </a>
           </div>
 
-
+          {/* There are two menus.  The first collapses when the screen is below 768, and 
+              a mobile menu button will appear */}
           <div className="collapse navbar-collapse" >
-            <ul className="nav navbar-nav navbar-right">
-              <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-log-in npr-orange"></span> Login</a></li>
-              {/* <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li> */}
-            </ul>
+            {MenuItems}
           </div>
-
+          {/* This second menu is hidden off screen until the mobile menu button is pressed */}
           <div style={Object.assign({}, this.styles.menuVisible, !this.state.menuEnabled && this.styles.menuHidden)}>
-            <ul className="nav navbar-nav navbar-right">
-              <li ><a href="#" onClick={login} className="npr-blue menu-item"><span className="glyphicon glyphicon-log-in npr-orange"></span> Dashboard</a></li>
-              <li ><a href="#" onClick={login} className="npr-blue menu-item"><span className="glyphicon glyphicon-log-in npr-orange"></span> Login</a></li>
-              {/* <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li> */}
-            </ul>
+            {MenuItems}
           </div>
 
 
