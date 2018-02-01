@@ -26,3 +26,8 @@
 	left: 0;
 	bottom: 1;
 }*/
+
+.navContainer {
+	overflow: hidden;
+	position: relative;
+}

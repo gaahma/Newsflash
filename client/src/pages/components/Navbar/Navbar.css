@@ -1,6 +1,6 @@
 .navbar, .navbar-inverse{
   background-color: #222;
-  border-bottom: 2px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .npr-orange{
@@ -10,4 +10,9 @@
 
 .npr-blue {
   color: #4e84c4 !important;
+  color: rgb(85, 85, 85);
 }
+
+/* .menu-item {
+  border-bottom: 1px solid #e5e5e5;
+} */

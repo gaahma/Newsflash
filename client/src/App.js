@@ -15,7 +15,7 @@ class App extends React.Component {
   render(){
     return(
       
-      <div className="container-fluid" id="wrapper">
+      <div className="container-fluid navContainer" id="wrapper">
         <Navbar/>
         <BrowserRouter>
           <div className="container" id="content">
