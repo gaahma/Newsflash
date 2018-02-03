@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 require('./routes/userRoutes.js')(app);
+require('./routes/nprRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

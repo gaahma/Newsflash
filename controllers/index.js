@@ -1,3 +1,5 @@
 module.exports = {
-  user: require("./userControllers")
+  user: require("./userControllers"),
+  npr: require("./nprControllers")
+
 }
