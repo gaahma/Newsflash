@@ -1,7 +1,8 @@
 import decode from 'jwt-decode';
-import browserHistory  from './history';
+import history  from './history';
 import credentials from './authCredentials';
 import auth0 from 'auth0-js';
+import { lstat } from 'fs';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
@@ -30,6 +31,7 @@ export function login() {
 export function logout() {
   clearIdToken();
   clearAccessToken();
+  localStorage.clear();
   window.location.href = '/';
 }
 

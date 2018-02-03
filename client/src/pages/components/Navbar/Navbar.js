@@ -18,7 +18,7 @@ class Navbar extends Component {
         padding: '1rem',
         zIndex: 1,
         opacity: 0.9,
-        //transition: '0.25s'
+        transition: '0.25s'
       },
       menuHidden: {
         right: '-500px',
@@ -31,6 +31,8 @@ class Navbar extends Component {
   }
 
   componentDidMount(){
+    //if the window size changes to 768 or higher, force close the mobile menu. 
+    //it isn't needed at those screen sizes
     window.addEventListener("resize", 
       () => {
         if(window.innerWidth > 767){
@@ -91,12 +93,11 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" >
             {MenuItems}
           </div>
+
           {/* This second menu is hidden off screen until the mobile menu button is pressed */}
           <div style={Object.assign({}, this.styles.menuVisible, !this.state.menuEnabled && this.styles.menuHidden)}>
             {MenuItems}
           </div>
-
-
         </div>
       </nav>
     )

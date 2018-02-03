@@ -4,10 +4,10 @@ import Landing from './pages/Landing';
 import Navbar from './pages/components/Navbar/Navbar';
 import Callback from './pages/Callback';
 import Main from './pages/Main';
-import { Route, BrowserRouter, Link } from 'react-router-dom';
+import { Route, Router, Link } from 'react-router-dom';
 import './App.css';
+import history from './utils/history.js';
 // import { requireAuth } from './utils/AuthService';
-//const history = require('./utils/history');  //Maybe not required.... hanging onto this for a bit in case
 
 
 class App extends React.Component {
@@ -17,14 +17,14 @@ class App extends React.Component {
       
       <div className="container-fluid navContainer" id="wrapper">
         <Navbar/>
-        <BrowserRouter>
+        <Router history={history}>
           <div className="container" id="content">
             <Route path="/" exact component={Landing}/>
             {/* <Route path="/special" component={Dashboard} onEnter={requireAuth} /> */}
             <Route path="/callback" exact component={Callback}/> 
             <Route path="/main" exact component={Main}/> 
           </div>
-        </BrowserRouter>
+        </Router>
 
         <footer className="modal-footer" id="footer">Written by Adam Haag <a href="/disclaimer">(Disclaimer)</a></footer>
       </div>
