@@ -8,7 +8,7 @@ class Landing extends Component{
     return(
       <div /*className="container"*/>
         <div className="banner-wrapper">
-          <img src="/assets/images/NPRLogo.png" 
+          <img src="./assets/images/NPRLogo.png" 
               alt="NPR Logo Banner"
               className="img-responsive"/>
           <div className="newsflash">
