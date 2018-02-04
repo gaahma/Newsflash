@@ -7,15 +7,25 @@ const headers = { headers:
 
 export default {
   test(){
-    axios.get("/authorized", headers)
-         .then(response => console.log(response.data));
+    axios.get("/authorized", 
+      { headers: 
+        { Authorization: `Bearer ${getAccessToken()}`}
+      }
+    ).then(response => console.log(response.data));
+         
   },
   getUser(){
-    axios.get(`/getUser/${getIdToken()}`,headers)
-         .then(response => console.log(response.data));
+    axios.get(`/getUser/${getIdToken()}`, 
+      { headers: 
+        { Authorization: `Bearer ${getAccessToken()}`}
+      }
+    ).then(response => console.log(response.data));
   },
   frontPage(){
-    return axios.get('/frontPage', headers);
+    return axios.get('/frontPage', 
+      { headers: 
+        { Authorization: `Bearer ${getAccessToken()}`}
+      });
          //.then(response => response.data);
   }
 }
