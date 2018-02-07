@@ -1,6 +1,5 @@
 import React, {Component} from  'react';
-import { login, logout, isLoggedIn } from '../../../utils/AuthService';
-import './Navbar.css';
+import { login, logout, isLoggedIn } from '../../utils/AuthService';
 
 class Navbar extends Component {
 

@@ -6,15 +6,26 @@ module.exports = {
   frontPage: function(req, res){
       //Scrape NPR
     const articles = [];
+    const categories = [];
     request("http://www.npr.org/sections/news/", function(err, response, html){
       const $ = cheerio.load(html);
       $(".resaudio").remove();  //remove audio articles from DOM
       $(".affiliation").remove(); //remove affilition links
+
+      $("ul.animated.fadeInRight").children("li").each(function(i, element){
+        category = {
+          href: "https://www.npr.org" + $(this).children("a").attr("href"),
+          name: $(this).children("a").text()
+        }
+        categories.push(category);
+      });
       $("article.has-image").each(function(i, element){
-        const result = {
+        $(this).find("span.date").remove();
+        const details = {
           title: $(this).children(".item-info")
                         .children("h2")
                         .children("a").text(),
+          description: $(this).find("p.teaser").text().trim(),
           link: $(this).children(".item-info")
                       .children("h2")
                       .children("a").attr("href"),
@@ -25,13 +36,9 @@ module.exports = {
           caption: $(this).find("b.credit").text().trim()
 
         }
-        articles.push(result);
+        articles.push(details);
       });
-
-      // $("article .item-image .imagewrap").each(function(i, element){
-      //   articles[i].img = $(this).children("img").attr("src");
-      // });
-      res.json(articles);
+      res.json({articles: articles, categories: categories});
     });
   }
 }

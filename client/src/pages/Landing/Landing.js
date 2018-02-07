@@ -1,7 +1,7 @@
 import React, {Component} from  'react';
-import { login, logout, isLoggedIn } from '../utils/AuthService';
-import api from '../utils/api';
-import "./css/Landing.css";
+import { login, logout, isLoggedIn } from '../../utils/AuthService';
+import api from '../../utils/api';
+import "./Landing.css";
 
 class Landing extends Component{
   render(){

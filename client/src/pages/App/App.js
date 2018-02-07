@@ -1,12 +1,12 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
-import Landing from './pages/Landing';
-import Navbar from './pages/components/Navbar/Navbar';
-import Callback from './pages/Callback';
-import Main from './pages/Main';
+import Landing from '../Landing/Landing';
+import Navbar from './Navbar.js';
+import Callback from './Callback';
+import Main from '../Main/Main.js';
 import { Route, Router, Link } from 'react-router-dom';
 import './App.css';
-import history from './utils/history.js';
+import history from '../../utils/history';
 // import { requireAuth } from './utils/AuthService';
 
 
