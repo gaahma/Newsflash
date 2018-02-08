@@ -7,10 +7,14 @@ import './Main.css';
 
 class Main extends React.Component{
   componentDidMount(){
-    //api.frontPage().then(res => this.setState({articles: res.data.articles, categories: res.data.categories}));
+    api.frontPage().then(res => this.setState({articles: res.data.articles, categories: res.data.categories}));
     //api.frontPage().then(res => localStorage.setItem("frontPage", JSON.stringify(res.data)));
-    this.setState({articles: JSON.parse(localStorage.getItem("frontPage")).articles});
-    this.setState({categories: JSON.parse(localStorage.getItem("frontPage")).categories});
+    //this.setState({articles: JSON.parse(localStorage.getItem("frontPage")).articles});
+    //this.setState({categories: JSON.parse(localStorage.getItem("frontPage")).categories});
+  }
+
+  setCategory(category){
+    api.categoryPage(category).then(res => this.setState({articles: res.data}));
   }
 
   
@@ -21,7 +25,7 @@ class Main extends React.Component{
     console.log(this.state);
     return (
       <div>
-        <Categories categories={this.state.categories}/>
+        <Categories categories={this.state.categories} setCategory={this.setCategory.bind(this)}/>
         {this.state.articles.map((a, i) => {
           return <Article title={a.title}
                           description={a.description}

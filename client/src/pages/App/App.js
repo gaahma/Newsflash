@@ -16,7 +16,7 @@ class App extends React.Component {
     return(
       
       <div className="container-fluid navContainer" id="wrapper">
-        <Navbar/>
+        <Navbar ref="navbar"/>
         <Router history={history}>
           <div className="container" id="content">
             <Route path="/" exact component={Landing}/>

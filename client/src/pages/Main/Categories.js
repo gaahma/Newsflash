@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 
+
 class Categories extends Component{
 
   render(){
     return(
-      <ul className="center-block">
-        {this.props.categories.map((c, i) => <li key={i} className="categories">{c.name}</li>)}
+      <ul className="category-list">
+        {this.props.categories.map((c, i) => (
+          <li key={i} className="categories">
+            <button className="categories" 
+                    onClick={() => this.props.setCategory(c.href)}>{c.name}</button>
+          </li>)
+        )}
       </ul>
     )
 

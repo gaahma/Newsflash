@@ -13,7 +13,7 @@ class Article extends Component{
 
           <div className="col-lg-4 col-sm-6 col-xs-12">
             <div className="image-wrapper">
-              {/* <img src={this.props.img} className="img-responsive article-img"/> */}
+              <img src={this.props.img} className="img-responsive article-img"/>
               <p className="caption center-block">{this.props.caption}</p>
             </div>
           </div>

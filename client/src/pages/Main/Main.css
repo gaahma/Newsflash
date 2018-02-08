@@ -8,20 +8,30 @@ article {
 ul {
   overflow-x: auto;
   white-space: nowrap; 
+  margin-bottom: 2rem;
 }
 
 
 ::-webkit-scrollbar {
-  /* width: 0px;   */
+  width: 0px;  
   background: transparent;
 }
 li.categories {
-  color: #f15c22;
+  color: #4e84c4;
   font-size: 2rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
   display: inline-block;
   text-decoration: none;
 }
+
+button.categories {
+  background-color: #e5e5e5;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+
 p, h3 {
   color: #e5e5e5;
 }

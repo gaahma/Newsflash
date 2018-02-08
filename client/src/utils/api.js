@@ -3,6 +3,11 @@ import {getAccessToken, getIdToken} from './AuthService';
 const headers = { headers: 
                  { Authorization: `Bearer ${getAccessToken()}`}
                 }
+function getHeader(){
+  return { headers: 
+    { Authorization: `Bearer ${getAccessToken()}`}
+   }
+}
 
 
 export default {
@@ -27,5 +32,8 @@ export default {
         { Authorization: `Bearer ${getAccessToken()}`}
       });
          //.then(response => response.data);
+  },
+  categoryPage(href){
+    return axios.get(href, getHeader());
   }
 }
