@@ -31,6 +31,7 @@ class Main extends React.Component{
                           description={a.description}
                           img={a.img}
                           caption={a.caption}
+                          link={a.link}
                           key={i} />
         })}
       </div>

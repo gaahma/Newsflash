@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import api from '../../utils/api';
 
 
 class Article extends Component{
   render(){
     return(
-      <article className="col-xs-12">
+      <article className="col-xs-12" onClick={() => api.getArticle(this.props.link)}>
         <div className="row article">
           <div className="col-lg-8 col-sm-6 col-xs-12">
             <h3 className="title center-block">{this.props.title}</h3>

@@ -28,6 +28,32 @@ function scrapeArticles($){
   return articles;
 }
 
+function scrapeArticleText($){
+  const paragraphs = [];
+  $("strong").remove();  //Remove subsection headers.  They're a bit awkward for speedreading...
+  $("div.storytext").children().each(function(i, element){
+    //console.log(element.name);
+    if(element.name === "p" || element.name === "blockquote"){
+      paragraphs.push($(this).text().trim());
+    }
+
+    if(element.name === "div" && element.attribs.class.split(" ").includes("twitter")){
+      var text = $(this).find("p").text();
+      $("p").remove();
+      $("a").remove();
+      var tweetAuthorText = $(this).find("blockquote.twitter-tweet").text().trim().split(' ');
+      var author = tweetAuthorText[tweetAuthorText.length - 1].split("")
+                  .filter(char => char !== ")" && char !== "(").join("");
+      var tweet = author + ' tweeted "' + text + '"';
+
+      paragraphs.push(tweet);
+      
+    }
+  });
+  console.log(paragraphs);
+  return paragraphs;
+}
+
 module.exports = {
   frontPage: function(req, res){
       //Scrape NPR
@@ -54,6 +80,15 @@ module.exports = {
       const $ = cheerio.load(html);
       const articles = scrapeArticles($);
       res.json(articles);
-    })
+    });
+  },
+
+  getArticle: function(req, res){
+    const {link} = req.headers;
+    request(link, function(err, response, html){
+      const $ = cheerio.load(html);
+      const text = scrapeArticleText($);
+      res.json({articleText: text});
+    });
   }
 }
