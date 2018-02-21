@@ -18,6 +18,9 @@ export default {
     axios.get(`/getUser/${getIdToken()}`, getHeader())
          .then(response => console.log(response.data));
   },
+  userLoggedIn(){
+    return axios.post(`/userLoggedIn`,{id: getIdToken()}, getHeader());
+  },
   frontPage(){
     return axios.get('/frontPage', getHeader());
          //.then(response => response.data);
@@ -31,7 +34,8 @@ export default {
       method: 'get',
       url: "/getArticle",
       headers: { Authorization: `Bearer ${getAccessToken()}`,
-                 link: link,
+                 link: link,  // it's practically impossible to send a url string to the server as a url param,
+                              // so I packaged it in the headers instead.  
                }
     });
   }

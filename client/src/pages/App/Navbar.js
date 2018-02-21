@@ -39,6 +39,8 @@ class Navbar extends Component {
         }
       }
     );
+    setInterval(this.setState({loggedIn: isLoggedIn()}), 600000);  //check for login status every 10 minutes
+
   }
 
   toggleMobileMenu(){
@@ -53,7 +55,7 @@ class Navbar extends Component {
   
   render(){
     var MenuItems;
-    if(!isLoggedIn()){
+    if(!this.state.loggedIn && !this.state.loggedIn){
       MenuItems = 
         (<ul className="nav navbar-nav navbar-right">
           <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Tutorial</a></li>

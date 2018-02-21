@@ -5,7 +5,7 @@ const UserSchema = new Schema({
   auth0Id: {
     type: String,
     required: [true, "Auth0 login required"],
-    unique: [true, "ID already exists"],
+    unique: true
   },
   firstName: {
     type: String,

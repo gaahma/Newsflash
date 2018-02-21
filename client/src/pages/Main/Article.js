@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import api from '../../utils/api';
+import history from '../../utils/history';
 
 
 class Article extends Component{
+  // onClick={() => api.getArticle(this.props.link).then(res => this.props.setArticle(res.data))}
   render(){
     return(
-      <article className="col-xs-12" onClick={() => api.getArticle(this.props.link)}>
+      <Link to={{pathname: '/reader', link: this.props.link}}>
+      <article className="col-xs-12">
         <div className="row article">
           <div className="col-lg-8 col-sm-6 col-xs-12">
             <h3 className="title center-block">{this.props.title}</h3>
@@ -18,10 +22,9 @@ class Article extends Component{
               <p className="caption center-block">{this.props.caption}</p>
             </div>
           </div>
-
-
         </div>
       </article>
+      </Link>
     )
   }
 }
