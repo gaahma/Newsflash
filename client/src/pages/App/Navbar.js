@@ -58,17 +58,18 @@ class Navbar extends Component {
     if(!this.state.loggedIn && !this.state.loggedIn){
       MenuItems = 
         (<ul className="nav navbar-nav navbar-right">
-          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Tutorial</a></li>
-          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-log-in npr-orange"></span> Login</a></li>
+          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-question-sign npr-orange"></span> About</button></li>
+          <li ><button onClick={login} className="nav-button npr-blue"><span className="glyphicon glyphicon-log-in npr-orange"></span> Login</button></li>
         </ul>
         );
     } else {
       MenuItems = 
         (<ul className="nav navbar-nav navbar-right">
-          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Tutorial</a></li>
-          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-paperclip npr-orange"></span> Saved</a></li>
-          <li ><a href="#" onClick={login} className="npr-blue"><span className="glyphicon glyphicon-user npr-orange"></span> Stats</a></li>
-          <li ><a href="#" onClick={logout} className="npr-blue"><span className="glyphicon glyphicon-log-out npr-orange"></span> Logout</a></li>
+          
+          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-cog npr-orange"></span> Dashboard</button></li>
+          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-pushpin npr-orange"></span> Saved</button></li>
+          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-question-sign npr-orange"></span> About</button></li>
+          <li ><button onClick={logout} className="nav-button npr-blue"><span className="glyphicon glyphicon-log-out npr-orange"></span> Logout</button></li>
         </ul>
         );
     }

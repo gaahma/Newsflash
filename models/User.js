@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const settings = require("./Settings");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -26,6 +27,12 @@ const UserSchema = new Schema({
   logins: {
     type: Number,
     default: 1,
+  },
+  settings: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Settings",
+    default: new settings()
   },
   savedArticles: [{
     type: Schema.Types.ObjectId,

@@ -4,13 +4,30 @@ article {
   margin-bottom: 1rem;
   
 }
-
-ul {
-  overflow-x: auto;
+.category-wrapper {
+  position: relative;
+  width: 100%;
+}
+ul.category-list {
+  list-style: none;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
   white-space: nowrap; 
   margin-bottom: 2rem;
+  padding-left: 0;
+  width: 99.5%; /* 99.5 because at 100%, the list seems to extend a bit past the edge,
+                  leaving a small 1px sliver that isn't covered by the gradient div */
 }
 
+.gradient {
+  position: absolute;
+  background: linear-gradient(to right, rgba(34, 34, 34, 0), rgba(34, 34, 34, 1));
+  height: 100%;
+  width: 20px;
+  top: 0;
+  right: 0;
+  content: ' ';
+}
 
 ::-webkit-scrollbar {
   width: 0px;  
@@ -19,7 +36,7 @@ ul {
 li.categories {
   color: #4e84c4;
   font-size: 2rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
   display: inline-block;
   text-decoration: none;
 }
@@ -61,6 +78,8 @@ p.caption {
   display: block;
   margin: auto;
 }
+
+
 
 @media (max-width: 768px) { 
   p.caption {

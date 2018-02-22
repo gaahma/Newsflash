@@ -1,11 +1,16 @@
-a:hover {
-  cursor: pointer;
+button.nav-button {
+  background-color: #222;
+  border: none;
+  outline: none;
+  margin: 0.5rem;
 }
 .navbar, .navbar-inverse{
   background-color: #222;
   border-bottom: 1px solid #e5e5e5;
 }
-
+.navbar-nav {
+  padding: 1rem;
+}
 .npr-orange{
   color: #f15c22 !important;
 }

@@ -36,7 +36,6 @@ class Main extends React.Component{
                           img={a.img}
                           caption={a.caption}
                           link={a.link}
-                          setArticle={this.props.setArticle}
                           key={i} />
         })}
       </div>
