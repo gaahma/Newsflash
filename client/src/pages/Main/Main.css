@@ -34,7 +34,6 @@ ul.category-list {
   background: transparent;
 }
 li.categories {
-  color: #4e84c4;
   font-size: 2rem;
   margin-right: 2rem;
   display: inline-block;
@@ -42,10 +41,16 @@ li.categories {
 }
 
 button.categories {
-  background-color: #e5e5e5;
+  color: #e5e5e5;
+  background-color: #4e84c4;
   border-radius: 10px;
   border: none;
   outline: none;
+}
+
+button.selected {
+  color: #4e84c4;
+  background-color: #e5e5e5;
 }
 
 

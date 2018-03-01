@@ -75,7 +75,7 @@ function scrapeArticleText($){
 module.exports = {
   frontPage: function(req, res){
       //Scrape NPR
-    const categories = [];
+    const categories = [{name: "Front Page", href: "/sections/news"}];
     request("http://www.npr.org/sections/news/", function(err, response, html){
       const $ = cheerio.load(html);
       $("ul.animated.fadeInRight").children("li").each(function(i, element){

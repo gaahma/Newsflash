@@ -16,7 +16,7 @@ class Navbar extends Component {
         borderBottom: '1px solid #e5e5e5',
         padding: '1rem',
         zIndex: 1,
-        opacity: 0.9,
+        opacity: 0.95,
         transition: '0.25s'
       },
       menuHidden: {
@@ -26,7 +26,7 @@ class Navbar extends Component {
   }
 
   state = {
-    menuEnabled: false
+    menuEnabled: false,
   }
 
   componentDidMount(){
@@ -40,6 +40,7 @@ class Navbar extends Component {
       }
     );
     setInterval(this.setState({loggedIn: isLoggedIn()}), 600000);  //check for login status every 10 minutes
+    this.setState({loggedIn: isLoggedIn()});
 
   }
 
@@ -55,7 +56,7 @@ class Navbar extends Component {
   
   render(){
     var MenuItems;
-    if(!this.state.loggedIn && !this.state.loggedIn){
+    if(!this.state.loggedIn){
       MenuItems = 
         (<ul className="nav navbar-nav navbar-right">
           <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-question-sign npr-orange"></span> About</button></li>

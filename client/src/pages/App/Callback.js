@@ -8,7 +8,7 @@ class Callback extends Component {
   componentDidMount() {
     setAccessToken();
     setIdToken();
-    api.userLoggedIn().then(() => history.push('/main'));
+    api.userLoggedIn().then(() => window.location.href = "/main");
 
   }
 
