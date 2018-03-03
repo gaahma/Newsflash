@@ -8,6 +8,7 @@
     "axios": "^0.17.1",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
+    "mousetrap": "^1.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
