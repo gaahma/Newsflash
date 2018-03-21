@@ -41,7 +41,6 @@ class Navbar extends Component {
     );
     setInterval(this.setState({loggedIn: isLoggedIn()}), 600000);  //check for login status every 10 minutes
     this.setState({loggedIn: isLoggedIn()});
-
   }
 
   toggleMobileMenu(){
@@ -51,9 +50,6 @@ class Navbar extends Component {
       this.setState({menuEnabled: true});
     }
   }
-
-
-  
   render(){
     var MenuItems;
     if(!this.state.loggedIn){
@@ -88,6 +84,9 @@ class Navbar extends Component {
             <a className="navbar-brand" href="/">
               <p className="npr-orange">News</p>
               <p className="npr-blue">Flash</p>
+            </a>
+            <a className="navbar-brand" href="https://www.npr.org/donations/support">
+              <p className="donate">Donate</p>
             </a>
           </div>
 

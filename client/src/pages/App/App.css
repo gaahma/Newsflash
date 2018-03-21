@@ -24,3 +24,10 @@ button.nav-button {
 	overflow: hidden;
 	position: relative;
 }
+
+p.donate {
+  color: #4e84c4;
+  text-decoration: underline;
+}
+
+

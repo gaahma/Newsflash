@@ -27,39 +27,52 @@ function scrapeArticles($){
   });
   return articles;
 }
-
+function filterEmptyStrings(t){
+  return t.split(" ").filter((str) =>  str !== "")
+}
 function scrapeArticleText($){
   const sections = [];
-  $("strong").remove();  //Remove subsection headers.  They're a bit awkward for speedreading...
+  const storyTitle = $("div.storytitle").children("h1").text().trim();
+  const storyImage = $("div.storytext").children("div.image")
+                                       .children("div.imagewrap")
+                                       .children("img")
+                                       .attr("src");
+  //console.log($.html());
+  $("br").replaceWith("<div> </div>");  //Remove <br> elements, and replace with a div containing a single space.
+                                        //<br> elements interfere with tweet scraping.  
+  $("strong").remove();  //Remove subsection headers.  They're a bit awkward for speedreading.
+
   $("div.storytext").children().each(function(i, element){
     var text;
     var type = null;
     if(element.name === "p"){
-      text = $(this).text().trim().split(" ");
+      text = filterEmptyStrings($(this).text().trim());
       type = "p"
 
     } else if(element.name === "blockquote"){
-      text = $(this).text().trim().split(" ");
+      text = filterEmptyStrings($(this).text().trim());
       type = "bq"
 
     } else if(element.name === "div" && element.attribs.class.split(" ").includes("twitter")){
-      var tweet = $(this).find("p").text().trim().split(" ");
+      var tweet = filterEmptyStrings($(this).find("p").text().trim());
+      console.log("found tweet", tweet);
       var type = "tweet";
-      $("p").remove();
-      $("a").remove();
+      // $("p").remove();
+      // $("a").remove();
       var tweetAuthorText = $(this).find("blockquote.twitter-tweet").text().trim().split(' ');
-      var author = tweetAuthorText[tweetAuthorText.length - 1].split("")
+      var author = tweetAuthorText[tweetAuthorText.length - 4].split("")
                   .filter(char => char !== ")" && char !== "(").join("");
 
 
       if(sections[sections.length -1].type === "tweet" && sections[sections.length -1].content[0] === author)
         //if the tweet is one in a series, and has the same author as the previous tweet, 
         //then send the tweet text as is.       
-        text = tweet;   
+        text = tweet.split(" ");   
       else {
         //if tweet is not preceeded by another tweet, or has a different author,
         //add the author's username to beginning of tweet.  
         text = author + " tweeted " + tweet;
+        text = text.split(" ");
       }
   
     }
@@ -68,8 +81,12 @@ function scrapeArticleText($){
     }
 
   });
-  console.log(sections);
-  return sections;
+  return {
+    storyImage: storyImage,
+    storyTitle: storyTitle,
+    sections: sections
+  }
+  // return sections;
 }
 
 module.exports = {
@@ -102,8 +119,8 @@ module.exports = {
     const {link} = req.headers;
     request(link, function(err, response, html){
       const $ = cheerio.load(html);
-      const text = scrapeArticleText($);
-      res.json({articleText: text});
+      const article = scrapeArticleText($);
+      res.json(article);
     });
   }
 }
