@@ -247,11 +247,13 @@ class Reader extends Component{
            sectionIndex: sectionIndex -1, 
            contentIndex: article[sectionIndex-1].content.length
           }, () => {
-            if(mod !== 0){
+            if(mod !== 0 && amt === -wordsPerFlash){
               this.step(-mod);
               // this.step(newContentIndex);
+            } else if(mod !== 0) {
+              this.step(-mod + amt)
             } else {
-              this.step(amt)
+              this.step(amt);
             }
             
             });
