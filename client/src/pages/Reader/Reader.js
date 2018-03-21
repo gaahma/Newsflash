@@ -217,15 +217,15 @@ class Reader extends Component{
 
 
   step(amt, offset){
-    if(offset){
-      if(offset === 1){
-        this.step(-1);
-      } else {
-        this.step(offset);
-      }
-      this.step(amt);
-      return;
-    }
+    // if(offset){
+    //   if(offset === 0){
+    //     this.step(0);
+    //   } else {
+    //     this.step(offset);
+    //   }
+    //   this.step(amt);
+    //   return;
+    // }
     
     
     var {sectionIndex, contentIndex, article, wordsPerFlash} = this.state;
@@ -242,11 +242,19 @@ class Reader extends Component{
     } else {
       if(newContentIndex < 0 && article[sectionIndex -1]){
         console.log("mod");
-        const mod = (article[sectionIndex -1].content.length % wordsPerFlash) -1;
+        const mod = (article[sectionIndex -1].content.length % wordsPerFlash);
         this.setState({
            sectionIndex: sectionIndex -1, 
-           contentIndex: article[sectionIndex-1].content.length - 1
-          }, () => this.step(amt, -mod));
+           contentIndex: article[sectionIndex-1].content.length
+          }, () => {
+            if(mod !== 0){
+              this.step(-mod);
+              // this.step(newContentIndex);
+            } else {
+              this.step(amt)
+            }
+            
+            });
        
       } else if (newContentIndex > 0 && article[sectionIndex + 1]){
         console.log("else if");
@@ -270,9 +278,6 @@ class Reader extends Component{
     
     return (
       <div className="reader-wrapper">
-        {/* <div className="row">
-          
-        </div> */}
         <div className="row">
           <div className="col-xs-offset-1 col-xs-10">
             <h1 className="text-center">{this.state.storyTitle}</h1>
