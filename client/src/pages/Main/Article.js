@@ -7,9 +7,8 @@ import history from '../../utils/history';
 class Article extends Component{
   // onClick={() => api.getArticle(this.props.link).then(res => this.props.setArticle(res.data))}
   render(){
-    console.log(this.props);
     return(
-      <Link to={{pathname: '/reader', link: this.props.link, details: this.props}}>
+      <Link to={{pathname: '/reader', link: this.props.link}}>
       <article className="col-xs-12">
         <div className="row article">
           <div className="col-lg-8 col-sm-6 col-xs-12">

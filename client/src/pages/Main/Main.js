@@ -11,7 +11,7 @@ class Main extends React.Component{
     api.frontPage()
        .then(res => this.setState({articles: res.data.articles, categories: res.data.categories}))
        .catch(e => logout());
-    api.getUser();
+    // api.getUser();
 
     
     //api.frontPage().then(res => localStorage.setItem("frontPage", JSON.stringify(res.data)));

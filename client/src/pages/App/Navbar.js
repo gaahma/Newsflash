@@ -1,5 +1,6 @@
 import React, {Component} from  'react';
 import { login, logout, isLoggedIn } from '../../utils/AuthService';
+import history from '../../utils/history';
 
 class Navbar extends Component {
 
@@ -43,6 +44,11 @@ class Navbar extends Component {
     this.setState({loggedIn: isLoggedIn()});
   }
 
+  menuItemClicked(location){
+    history.push(location);
+    this.setState({menuEnabled: false});
+  }
+
   toggleMobileMenu(){
     if(this.state.menuEnabled){
       this.setState({menuEnabled: false});
@@ -62,10 +68,9 @@ class Navbar extends Component {
     } else {
       MenuItems = 
         (<ul className="nav navbar-nav navbar-right">
-          
-          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-cog npr-orange"></span> Dashboard</button></li>
-          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-pushpin npr-orange"></span> Saved</button></li>
-          <li ><button className="nav-button npr-blue"><span className="glyphicon glyphicon-question-sign npr-orange"></span> About</button></li>
+          <li ><button onClick={()=> this.menuItemClicked("/main")} className="nav-button npr-blue"><span className="glyphicon glyphicon-th npr-orange"></span> Browse</button></li> 
+          <li ><button onClick={() => this.menuItemClicked("/reader")} className="nav-button npr-blue"><span className="glyphicon glyphicon-book npr-orange"></span> Reader</button></li>
+          <li ><button onClick={() => this.menuItemClicked("/dashboard")} className="nav-button npr-blue"><span className="glyphicon glyphicon-cog npr-orange"></span> Dashboard</button></li>
           <li ><button onClick={logout} className="nav-button npr-blue"><span className="glyphicon glyphicon-log-out npr-orange"></span> Logout</button></li>
         </ul>
         );
@@ -86,7 +91,8 @@ class Navbar extends Component {
               <p className="npr-blue">Flash</p>
             </a>
             <a className="navbar-brand" href="https://www.npr.org/donations/support">
-              <p className="donate">Donate</p>
+              <p className="npr-orange">Support</p>
+              <p className="npr-blue"> NPR</p>
             </a>
           </div>
 

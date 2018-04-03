@@ -12,6 +12,7 @@ app.use(cors());
 
 require('./routes/userRoutes.js')(app);
 require('./routes/nprRoutes')(app);
+require('./routes/settingsRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

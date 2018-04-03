@@ -1,0 +1,21 @@
+div.stat {
+  display: block;
+  color: #e5e5e5;
+}
+
+.setting {
+  margin-left: 1rem;
+}
+
+button.save {
+  background-color: #e5e5e5;
+
+}
+
+button.save:hover {
+  background-color: #4e84c4;
+}
+select {
+  background-color:#e5e5e5;
+  color: black;
+}

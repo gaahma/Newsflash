@@ -4,6 +4,12 @@ import api from '../../utils/api';
 import "./Landing.css";
 
 class Landing extends Component{
+
+  componentWillMount(){
+    if(isLoggedIn){
+      //window.location.href = "/main";
+    }
+  }
   render(){
     return(
       <div /*className="container"*/>

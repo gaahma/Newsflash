@@ -1,10 +1,11 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import Landing from '../Landing/Landing';
 import Navbar from './Navbar.js';
 import Callback from './Callback';
 import Main from '../Main/Main.js';
 import Reader from '../Reader/Reader.js';
+import Dashboard from '../Dashboard/Dashboard.js';
+import Disclaimer from '../Disclaimer/Disclaimer.js';
 import { Route, Router, Link } from 'react-router-dom';
 import './App.css';
 import history from '../../utils/history';
@@ -24,6 +25,8 @@ class App extends React.Component {
             <Route path="/callback" exact component={Callback}/> 
             <Route path="/main" exact component={Main}/> 
             <Route path="/reader" exact component={Reader}/>
+            <Route path="/dashboard" exact component={Dashboard}/>
+            <Route path="/disclaimer" exact component={Disclaimer}/>
           </div>
         </Router>
         <footer className="modal-footer" id="footer">Written by Adam Haag <a href="/disclaimer">(Disclaimer)</a> </footer>

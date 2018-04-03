@@ -18,7 +18,8 @@ class Reader extends Component{
            this.setState({
              article: res.data.sections,
              storyImage: res.data.storyImage,
-             storyTitle: res.data.storyTitle
+             storyTitle: res.data.storyTitle,
+             link: link
            }); 
            //localStorage.setItem("article", JSON.stringify(res.data.sections))
            
@@ -26,20 +27,18 @@ class Reader extends Component{
          .catch(e => console.log(e));
       localStorage.setItem("link", link);
       this.setState({articleFlash: "", sectionIndex: 0, contentIndex: 0});
-    } else {
+    } else if( article){
       this.setState({articleFlash: "", sectionIndex: 0, contentIndex: 0, article: article});
+    } else {
+      this.setState({articleFlash: "Browse to select an article"});
     }
-
-    this.setState({speed: 400,
-                   endOfParagraphPause: 1, 
-                   punctuationPause: 1, 
-                   wordsPerFlash: 2,
-                   contentTypesEnabled: true});
-
-    
+    api.getUser()
+       .then((res) => {
+          this.setState(res.data.settings);
+       })
     
 
-  }
+   }
 
   componentDidMount(){
     //Bind keyboard shortcuts to the component
@@ -67,7 +66,7 @@ class Reader extends Component{
         this.resetReader();
         break;
       case "ArrowLeft":
-        this.backOneFlash();
+        // this.backOneFlash();
         break;
       default: console.log("default");
     }
@@ -76,6 +75,7 @@ class Reader extends Component{
 
   //Start or stop the reader
   toggleReading(){
+    if(!this.state.article) return;
     this.toggleReader.blur();  //blur the stop/start button.  If the button was clicked to start
                                //the reader, the start/stop keyboard shortcut will be ineffective
                                //because the button has focus.
@@ -102,6 +102,15 @@ class Reader extends Component{
       sectionIndex: 0,
       articleFlash: ""
     })
+  }
+
+  goToEndOfArticle(){
+    if(!this.state.article) return;
+    var sectionIndex = this.state.article.length - 1;
+    this.setState({
+      sectionIndex: sectionIndex,
+      contentIndex: this.state.article[sectionIndex].content.length
+    }, this.step(-this.state.wordsPerFlash));
   }
 
   //Tests a flash for substrings that include titles.  
@@ -145,6 +154,8 @@ class Reader extends Component{
   }
   //Recursively read the article
   readArticle(previousFlashHadPunctuation, previousFlashWasEndOfParagraph){
+    if(!this.state.article) return;
+
     let updateState,
         hasPunctuation = false,
         isEndOfParagraph = false;
@@ -171,6 +182,7 @@ class Reader extends Component{
         isEndOfParagraph = true;
         updateState = {
             contentIndex: 0,
+            sectionIndex: sectionIndex + 1,
             articleFlash: ""
           }
       } else {
@@ -186,7 +198,7 @@ class Reader extends Component{
       }
     } else {
       this.setState({isReading: false});
-      //insert function that updates articles read to api here
+      api.userReadArticle();
       updateState = null;
     }
 
@@ -217,17 +229,8 @@ class Reader extends Component{
 
 
   step(amt, offset){
-    // if(offset){
-    //   if(offset === 0){
-    //     this.step(0);
-    //   } else {
-    //     this.step(offset);
-    //   }
-    //   this.step(amt);
-    //   return;
-    // }
-    
-    
+    if(!this.state.article) return;
+
     var {sectionIndex, contentIndex, article, wordsPerFlash} = this.state;
     var newContentIndex = amt + contentIndex;
     if((newContentIndex < article[sectionIndex].content.length && newContentIndex >= 0)){
@@ -249,7 +252,7 @@ class Reader extends Component{
           }, () => {
             if(mod !== 0 && amt === -wordsPerFlash){
               this.step(-mod);
-              // this.step(newContentIndex);
+
             } else if(mod !== 0) {
               this.step(-mod + amt)
             } else {
@@ -263,32 +266,45 @@ class Reader extends Component{
         this.setState({
           sectionIndex: sectionIndex + 1, 
           contentIndex: 0
-        }, () => this.step(0));
-        //this.step(newContentIndex - contentIndex);
+        }, () => {
+          if(amt === wordsPerFlash){
+            this.step(0)
+          } else {
+            this.step(amt);
+          }
+        });
       } else {
         console.log("else");
           this.resetReader();
-        
       }
   }
 }
 
   render(){
-    if(!this.state){
+    if(!this.state ){
       return null;
     }
+
+    // "reader-text text-center " + this.state.contentType
+    var contentClass = 'reader-text text-center';
+    if(this.state.contentTypesEnabled){
+      contentClass = contentClass + " " + this.state.contentType;
+    } else {
+      contentClass = contentClass + " p";
+    }
+
     
     return (
       <div className="reader-wrapper">
         <div className="row">
           <div className="col-xs-offset-1 col-xs-10">
             <h1 className="text-center">{this.state.storyTitle}</h1>
-            <img className="img-responsive" src={this.state.storyImage} alt="story image"/>
+            {this.state.storyImage ? (<img className="img-responsive" src={this.state.storyImage} alt="story image"/>) : ""}
           </div>
         </div>
         <div className="row">
           <div className={"col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6"}>
-            <h4 className={"reader-text text-center " + this.state.contentType}>
+            <h4 className={contentClass}>
                 {this.state.articleFlash}
             </h4>
           </div>
@@ -344,7 +360,7 @@ class Reader extends Component{
           </li>
             <li className="control">
               <button className="controls"
-                    ref="fastForward"
+                      ref="endOfArticle"
                     ><span className="glyphicon glyphicon-fast-forward"></span>
               </button>
             </li>

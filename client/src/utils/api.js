@@ -15,10 +15,13 @@ export default {
          
   },
   getUser(){
-    axios.get(`/getUser/${getIdToken()}`, getHeader())
-         .then(response => console.log(response.data));
+    return axios.get(`/getUser/${getIdToken()}`, getHeader());
+        //  .then(response => console.log(response.data));
   },
-  userLoggedIn(){
+  userReadArticle(){
+    return axios.put(`/userReadArticle/${getIdToken()}`,{}, getHeader());
+  },
+  userLoggedIn(){  //should be using axios.put
     return axios.post(`/userLoggedIn`,{id: getIdToken()}, getHeader());
   },
   frontPage(){
@@ -38,5 +41,9 @@ export default {
                               // so I packaged it in the headers instead.  
                }
     });
+  },
+
+  updateSettings(settings){
+    return axios.put(`/updateSettings/${settings._id}`, {settings: settings}, getHeader());
   }
 }
