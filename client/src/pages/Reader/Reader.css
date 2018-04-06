@@ -47,18 +47,19 @@ ul.controlPanel {
   text-align: center;
   text-decoration: none;
   padding-left: 0;
-  /* width: 100%; */
+  width: 100%;
   display: table;
-  /* table-layout: auto; */
+  table-layout: auto;
 
-  table-layout: fixed;
+  /* table-layout: fixed;
   max-width: none;
   width: auto;
-  min-width: 100%;
+  min-width: 100%; */
 
 }
 
 li.control {
   display: inline-block !important;
-  /* margin: auto; */
+  margin: 0;
+  padding: 0;
 }
