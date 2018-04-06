@@ -55,5 +55,6 @@ ul.controlPanel {
 }
 
 li.control {
-  display: inline-block;
+  display: inline-block !important;
+  margin: auto;
 }
