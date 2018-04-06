@@ -46,10 +46,11 @@ div.controlPanel {
 ul.controlPanel {
   text-align: center;
   text-decoration: none;
-  padding-left: 0;
+  padding: 0;
+  list-style-type: none;
   width: 100%;
-  display: table;
-  table-layout: auto;
+  /* display: table;
+  table-layout: auto; */
 
   /* table-layout: fixed;
   max-width: none;
