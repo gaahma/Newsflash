@@ -1,6 +1,6 @@
 const db = require("../models");
 const jwtDecode = require('jwt-decode');
-const secret = require('./secret.js');
+
 
 
 module.exports = {
