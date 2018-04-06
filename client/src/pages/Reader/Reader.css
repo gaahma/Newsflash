@@ -47,9 +47,14 @@ ul.controlPanel {
   text-align: center;
   text-decoration: none;
   padding-left: 0;
-  width: 100%;
+  /* width: 100%; */
   display: table;
-  table-layout: auto;
+  /* table-layout: auto; */
+
+  table-layout: fixed;
+  max-width: none;
+  width: auto;
+  min-width: 100%;
 
 }
 
