@@ -38,7 +38,7 @@ module.exports = {
 
     var auth0Id = jwtDecode(id).aud;
     db.User
-      .findOne({auth0Id: id})
+      .findOne({auth0Id: auth0Id})
       .populate("settings")
       .exec((err, user) => {
         console.log(err, user);
@@ -59,7 +59,7 @@ module.exports = {
     }
     var auth0Id = jwtDecode(id).aud;
     db.User
-      .findOneAndUpdate({auth0Id: id}, {$inc: {articlesRead: 1}})
+      .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {articlesRead: 1}})
       .exec((err, user) => {
         if(!user){
           res.sendStatus(404);
