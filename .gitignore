@@ -1,5 +1,6 @@
 node_modules
 authCredentials.js
+secret.js
 todo.txt
 .DS_Store
 backup

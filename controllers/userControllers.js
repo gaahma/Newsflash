@@ -1,17 +1,18 @@
 const db = require("../models");
+const jwtDecode = require('jwt-decode');
+const secret = require('./secret.js');
 
 
 module.exports = {
   userLoggedIn: function(req, res){
     let {id} = req.body;
-    
     if(!id){
       res.sendStatus(422);
       return;
     }
-    id = id.split(".")[0];
+    var auth0Id = jwtDecode(id).aud;
     db.User
-      .findOneAndUpdate({auth0Id: id}, {$inc: {logins: 1}})
+      .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {logins: 1}})
       .exec((err, user) => {
         if(!user){
           db.User.create({auth0Id: id})
@@ -21,6 +22,7 @@ module.exports = {
                    res.sendStatus(200)
                   });
         } else {
+          console.log(user);
           res.sendStatus(200);
         }
 
@@ -34,7 +36,7 @@ module.exports = {
       return;
     }
 
-    id = id.split(".")[0];
+    var auth0Id = jwtDecode(id).aud;
     db.User
       .findOne({auth0Id: id})
       .populate("settings")
@@ -55,7 +57,7 @@ module.exports = {
       res.sendStatus(422);
       return;
     }
-    id = id.split(".")[0];
+    var auth0Id = jwtDecode(id).aud;
     db.User
       .findOneAndUpdate({auth0Id: id}, {$inc: {articlesRead: 1}})
       .exec((err, user) => {
