@@ -15,7 +15,7 @@ module.exports = {
       .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {logins: 1}})
       .exec((err, user) => {
         if(!user){
-          db.User.create({auth0Id: id})
+          db.User.create({auth0Id: auth0Id})
                  .then((user) => {
                    console.log(user);
                    db.Settings.create({_id: user.settings})
