@@ -32,7 +32,8 @@ button.controls {
   font-size: 2rem;
   display: inline-block;
   margin: auto;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
+  padding: 1rem;
 }
 
 /* button.controls:hover {
@@ -49,8 +50,8 @@ ul.controlPanel {
   padding: 0;
   list-style-type: none;
   width: 100%;
-  /* display: table;
-  table-layout: auto; */
+  display: table;
+  table-layout: auto;
 
   /* table-layout: fixed;
   max-width: none;
