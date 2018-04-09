@@ -275,7 +275,7 @@ class Reader extends Component{
         });
       } else {
         console.log("else");
-          this.resetReader();
+          // this.resetReader();
       }
   }
 }

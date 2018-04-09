@@ -15,17 +15,13 @@ module.exports = {
       .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {logins: 1}})
       .exec((err, user) => {
         if(!user){
-          db.User.create({auth0Id: auth0Id})
-                 .then((user) => {
-                   console.log(user);
-                   db.Settings.create({_id: user.settings})
-                   res.sendStatus(200)
-                  });
+          const settings = new db.Settings();
+          settings.save();
+          const user = new db.User({auth0Id: auth0Id, settings: settings._id});
+          user.save().then(() => res.sendStatus(200));
         } else {
-          console.log(user);
           res.sendStatus(200);
         }
-
       })
       .catch(err => res.status(422).json(err));
   },

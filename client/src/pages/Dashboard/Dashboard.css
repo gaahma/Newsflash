@@ -19,3 +19,7 @@ select {
   background-color:#e5e5e5;
   color: black;
 }
+
+input {
+  width: 5rem;
+}

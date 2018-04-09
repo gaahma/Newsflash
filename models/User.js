@@ -32,7 +32,6 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: "Settings",
-    default: new settings()
   },
   savedArticles: [{
     type: Schema.Types.ObjectId,

@@ -11,12 +11,13 @@ const SettingSchema = new Schema({
     type: Number,
     default: 1,
     min: 1,
+    max: 5,
   },
   speed: {
     type: Number,
     default: 400,
     min: 50,
-    max: 3000,
+    max: 2000,
   },
   contentTypesEnabled: {
     type: Boolean,
