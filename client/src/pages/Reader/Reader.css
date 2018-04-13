@@ -60,6 +60,10 @@ ul.controlPanel {
 
 }
 
+div.full-article {
+  text-align: center;
+}
+
 li.control {
   display: inline-block !important;
   margin: 0;

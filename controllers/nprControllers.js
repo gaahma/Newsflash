@@ -40,7 +40,7 @@ function scrapeArticleText($){
   //console.log($.html());
   $("br").replaceWith("<div> </div>");  //Remove <br> elements, and replace with a div containing a single space.
                                         //<br> elements interfere with tweet scraping.  
-  $("strong").remove();  //Remove subsection headers.  They're a bit awkward for speedreading.
+  // $("strong").remove();  //Remove subsection headers.  They're a bit awkward for speedreading.
 
   $("div.storytext").children().each(function(i, element){
     var text;
@@ -54,7 +54,7 @@ function scrapeArticleText($){
       type = "bq"
 
     } else if(element.name === "div" && element.attribs.class.split(" ").includes("twitter")){
-      var tweet = filterEmptyStrings($(this).find("p").text().trim());
+      var tweet = $(this).find("p").text().trim();
       console.log("found tweet", tweet);
       var type = "tweet";
       // $("p").remove();
@@ -63,17 +63,18 @@ function scrapeArticleText($){
       var author = tweetAuthorText[tweetAuthorText.length - 4].split("")
                   .filter(char => char !== ")" && char !== "(").join("");
 
-
-      if(sections[sections.length -1].type === "tweet" && sections[sections.length -1].content[0] === author)
-        //if the tweet is one in a series, and has the same author as the previous tweet, 
-        //then send the tweet text as is.       
-        text = tweet.split(" ");   
-      else {
-        //if tweet is not preceeded by another tweet, or has a different author,
-        //add the author's username to beginning of tweet.  
-        text = author + " tweeted " + tweet;
-        text = text.split(" ");
-      }
+      // text = author + " tweeted " + tweet;
+      text = filterEmptyStrings(tweet);
+      // if(sections[sections.length -1].type === "tweet" && sections[sections.length -1].content[0] === author)
+      //   //if the tweet is one in a series, and has the same author as the previous tweet, 
+      //   //then send the tweet text as is.       
+      //   text = tweet;   
+      // else {
+      //   //if tweet is not preceeded by another tweet, or has a different author,
+      //   //add the author's username to beginning of tweet.  
+      //   text = author + " tweeted " + tweet;
+      //   //text = text;
+      // }
   
     }
     if(type && text.length > 1){

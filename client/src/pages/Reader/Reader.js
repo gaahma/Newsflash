@@ -368,6 +368,9 @@ class Reader extends Component{
             </ul>
           </div>
         </div>
+        <div className="row full-article">
+          <a href={this.state.link} target="_blank">Full Article</a>
+        </div>
       </div>
       
     )
