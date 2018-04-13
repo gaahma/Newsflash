@@ -10,14 +10,15 @@ module.exports = {
       res.sendStatus(422);
       return;
     }
-    var auth0Id = jwtDecode(id).aud;
+    console.log(id)
+    var auth0Id = jwtDecode(id).sub;
     db.User
       .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {logins: 1}})
       .exec((err, user) => {
         if(!user){
           const settings = new db.Settings();
-          settings.save();
           const user = new db.User({auth0Id: auth0Id, settings: settings._id});
+          settings.save();
           user.save().then(() => res.sendStatus(200));
         } else {
           res.sendStatus(200);
@@ -32,7 +33,7 @@ module.exports = {
       return;
     }
 
-    var auth0Id = jwtDecode(id).aud;
+    var auth0Id = jwtDecode(id).sub;
     db.User
       .findOne({auth0Id: auth0Id})
       .populate("settings")
@@ -53,7 +54,7 @@ module.exports = {
       res.sendStatus(422);
       return;
     }
-    var auth0Id = jwtDecode(id).aud;
+    var auth0Id = jwtDecode(id).sub;
     db.User
       .findOneAndUpdate({auth0Id: auth0Id}, {$inc: {articlesRead: 1}})
       .exec((err, user) => {
