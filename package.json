@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "NPR news speedreading app",
   "main": "server.js",
+  "engines": {
+    "node": "10.14.1"
+  },
   "scripts": {
     "server": "node server.js",
     "client": "node scripts/start-client.js",
