@@ -8,12 +8,14 @@ function scrapeArticles($){
   $(".affiliation").remove(); //remove affilition links
   $("article.has-image").each(function(i, element){
     $(this).find("span.date").remove();
+    const item = $(this).children('.item-info').children('h2').text();
+    console.log({item});
     const details = {
-      title: $(this).children(".item-info")
+      title: $(this).find(".item-info")
                     .children("h2")
                     .children("a").text(),
       description: $(this).find("p.teaser").text().trim(),
-      link: $(this).children(".item-info")
+      link: $(this).find(".item-info")
                   .children("h2")
                   .children("a").attr("href"),
       img: $(this).children(".item-image")
